@@ -25,10 +25,10 @@
   <div class="relative mx-auto max-w-360 px-5 sm:px-8 lg:px-12">
     <header class="flex items-center justify-between py-5 md:py-7">
       <a href={resolve('/')} class="flex items-center gap-3" aria-label="Unique Beauty home">
-        <img src="/favicon.png" alt="" class="h-11 w-11 object-contain" />
+        <img src="/favicon.png" alt="" class="h-16 w-16 object-contain sm:h-20 sm:w-20" />
         <div>
-          <p class="text-lg font-bold tracking-tight text-[#342b2b]">Unique Beauty</p>
-          <p class="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#a16f7c]">Team Operations</p>
+          <p class="text-2xl font-bold tracking-tight text-[#342b2b] sm:text-2xl">Unique Beauty</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[#a16f7c] sm:text-sm">Team Operations</p>
         </div>
       </a>
 
@@ -85,7 +85,7 @@
               </div>
             </div>
           </div>
-          <div class="absolute -bottom-5 -left-3 rounded-2xl border border-white/80 bg-white/90 px-5 py-4 shadow-xl backdrop-blur sm:-left-7">
+          <div class="absolute -bottom-14 -right-3 rounded-2xl border border-white/80 bg-white/90 px-5 py-4 shadow-xl backdrop-blur sm:-right-7">
             <div class="flex items-center gap-3">
               <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#fff0f7] text-[#d93483]">✓</span>
               <div><p class="text-sm font-bold">Schedule connected</p><p class="text-xs text-[#907878]">Team updates in real time</p></div>
@@ -97,7 +97,10 @@
       <section class="border-t border-[#ded2d0] py-16 lg:py-24">
         <div class="mb-10 flex flex-col justify-between gap-5 md:flex-row md:items-end">
           <div>
-            <p class="text-xs font-bold uppercase tracking-[0.22em] text-[#d93483]">Built for daily operations</p>
+            <div class="mb-5 flex items-center gap-3">
+              <span class="h-px w-10 bg-[#d93483]"></span>
+              <p class="text-xs font-bold uppercase tracking-[0.22em] text-[#d93483]">Built for daily operations</p>
+            </div>
             <h2 class="mt-3 max-w-xl text-4xl font-bold tracking-[-0.04em] text-[#342b2b] md:text-5xl">Everything your team needs, finally in one place.</h2>
           </div>
           <p class="max-w-md text-base leading-7 text-[#756565]">A focused experience designed to reduce scheduling friction and keep everyone confidently aligned.</p>
@@ -105,13 +108,18 @@
 
         <div class="grid gap-4 md:grid-cols-3">
           {#each capabilities as capability (capability.number)}
-            <article class="group rounded-[1.75rem] border border-[#e6dbd9] bg-white p-7 shadow-[0_14px_40px_rgba(75,55,57,0.06)] transition duration-300 hover:-translate-y-2 hover:shadow-[0_24px_55px_rgba(75,55,57,0.12)]">
-              <div class="flex items-center justify-between">
-                <span class="text-sm font-bold text-[#d93483]">{capability.number}</span>
-                <span class="h-px w-16 bg-[#e0d5d3] transition-all group-hover:w-24 group-hover:bg-[#d93483]"></span>
+            <article class="group relative min-h-72 overflow-hidden rounded-4xl border border-white/80 bg-white p-7 shadow-[0_18px_50px_rgba(75,55,57,0.08)] transition duration-500 hover:-translate-y-2 hover:border-[#f0bfd4] hover:shadow-[0_28px_70px_rgba(75,55,57,0.16)]">
+              <div class="pointer-events-none absolute -right-16 -top-16 h-44 w-44 rounded-full bg-[#fff1f7] transition-transform duration-500 group-hover:scale-125"></div>
+              <div class="relative flex items-center justify-between">
+                <span class="flex h-11 w-11 items-center justify-center rounded-full border border-[#f0d6df] bg-[#fff9fb] text-sm font-bold text-[#d93483]">{capability.number}</span>
+                <span class="h-px w-14 bg-[#e0d5d3] transition-all duration-500 group-hover:w-24 group-hover:bg-[#d93483]"></span>
               </div>
-              <h3 class="mt-16 text-xl font-bold text-[#342b2b]">{capability.title}</h3>
-              <p class="mt-3 leading-7 text-[#756565]">{capability.text}</p>
+              <div class="relative mt-12">
+                <p class="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-[#b08e95]">Unique Beauty platform</p>
+                <h3 class="text-2xl font-bold tracking-tight text-[#342b2b]">{capability.title}</h3>
+                <p class="mt-4 leading-7 text-[#756565]">{capability.text}</p>
+              </div>
+              <div class="absolute bottom-7 right-7 flex h-9 w-9 items-center justify-center rounded-full bg-[#342b2b] text-white opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 translate-x-2" aria-hidden="true">→</div>
             </article>
           {/each}
         </div>
