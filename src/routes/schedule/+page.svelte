@@ -1,15 +1,27 @@
 <script lang="ts">
   import { supabase } from '$lib/supabaseClient';
   import { onMount } from 'svelte';
+  import { SvelteDate } from 'svelte/reactivity';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import ScheduleCalendar from '$lib/components/ScheduleCalendar.svelte';
 
-  let profile = $state<any>(null);
-  let shifts = $state<any[]>([]);
+  type Profile = Record<string, string | number | boolean | null | undefined>;
+
+  type Shift = {
+    id?: string | number;
+    title?: string;
+    start_time?: string;
+    end_time?: string;
+    shift_role?: string;
+    color?: string | null;
+  };
+
+  let profile = $state<Profile | null>(null);
+  let shifts = $state<Shift[]>([]);
   let loading = $state(true);
   let error = $state('');
   let sidebarOpen = $state(false);
-  let view = $state<'day' | 'week' | 'month'>('week');
+  let view = $state<'day' | 'week' | 'month'>('month');
 
   onMount(async () => {
     try {
@@ -54,34 +66,37 @@
     }
   });
 
-  function sameDay(a: string, b: Date) {
-    const d = new Date(a);
-    return (
-      d.getFullYear() === b.getFullYear() &&
-      d.getMonth() === b.getMonth() &&
-      d.getDate() === b.getDate()
-    );
+  function sameDay(dateValue: string | undefined, compareDate: Date) {
+    if (!dateValue) return false;
+
+    return getDateKey(dateValue) === getDateKey(compareDate);
   }
 
-  function inCurrentWeek(date: string) {
-    const d = new Date(date);
-    const now = new Date();
-    const start = new Date(now);
-    const day = start.getDay();
+  function getDateKey(value: string | Date) {
+    if (typeof value === 'string') return value.slice(0, 10);
 
-    start.setDate(now.getDate() - day);
+    return `${value.getFullYear()}-${String(value.getMonth() + 1).padStart(2, '0')}-${String(value.getDate()).padStart(2, '0')}`;
+  }
+
+  function inNextTenDays(dateValue: string | undefined) {
+    if (!dateValue) return false;
+
+    const start = new SvelteDate();
     start.setHours(0, 0, 0, 0);
 
-    const end = new Date(start);
-    end.setDate(start.getDate() + 7);
+    const end = new SvelteDate(start);
+    end.setDate(start.getDate() + 9);
+    end.setHours(23, 59, 59, 999);
 
-    return d >= start && d < end;
+    const dateKey = getDateKey(dateValue);
+    return dateKey >= getDateKey(start) && dateKey <= getDateKey(end);
   }
 
-  function inCurrentMonth(date: string) {
-    const d = new Date(date);
-    const now = new Date();
-    return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  function inCurrentMonth(dateValue: string | undefined) {
+    if (!dateValue) return false;
+
+    const now = new SvelteDate();
+    return getDateKey(dateValue).slice(0, 7) === getDateKey(now).slice(0, 7);
   }
 
   const filteredShifts = $derived.by(() => {
@@ -91,11 +106,11 @@
       return shifts.filter((shift) => sameDay(shift.start_time, now));
     }
 
-    if (view === 'week') {
-      return shifts.filter((shift) => inCurrentWeek(shift.start_time));
+    if (view === 'month') {
+      return shifts.filter((shift) => inCurrentMonth(shift.start_time));
     }
 
-    return shifts.filter((shift) => inCurrentMonth(shift.start_time));
+    return shifts.filter((shift) => inNextTenDays(shift.start_time));
   });
 </script>
 
@@ -116,7 +131,7 @@
 
           <div>
             <p class="text-lg font-bold text-[#6b4f4f]">Schedule</p>
-            <p class="text-sm text-[#9c7b7b]">View your day, week, and month shifts</p>
+            <p class="text-sm text-[#9c7b7b]">View your monthly calendar and scheduled shifts</p>
           </div>
         </div>
 
@@ -142,7 +157,7 @@
                 : 'bg-[#f7edee] text-[#6b4f4f]'
             }`}
           >
-            Week
+            10 Days
           </button>
 
           <button
@@ -195,7 +210,7 @@
                     : 'bg-[#f7edee] text-[#6b4f4f]'
                 }`}
               >
-                Week
+                10 Days
               </button>
 
               <button

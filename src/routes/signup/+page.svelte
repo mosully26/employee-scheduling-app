@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { supabase } from '$lib/supabaseClient';
 
   let full_name = $state('');
@@ -56,11 +57,11 @@
   }
 </script>
 
-<div class="min-h-screen bg-[radial-gradient(circle_at_top,_#fff9f8_0%,_#f7edee_55%,_#f1e4e6_100%)] px-4 py-10">
+<div class="min-h-screen bg-[radial-gradient(circle_at_top,#fff9f8_0%,#f7edee_55%,#f1e4e6_100%)] px-4 py-10">
   <div class="mx-auto flex min-h-[85vh] max-w-md items-center justify-center">
-    <div class="w-full rounded-[2rem] border border-white/70 bg-white/80 p-8 shadow-[0_20px_60px_rgba(107,79,79,0.14)] backdrop-blur">
+    <div class="w-full rounded-4xl border border-white/70 bg-white/80 p-8 shadow-[0_20px_60px_rgba(107,79,79,0.14)] backdrop-blur">
       <div class="mb-6 flex flex-col items-center text-center">
-        <a href="/" class="mb-4 transition hover:scale-[1.02]">
+        <a href={resolve('/')} class="mb-4 transition hover:scale-[1.02]">
           <img
             src="/favicon.png"
             alt="Unique Beauty logo"
@@ -70,7 +71,7 @@
 
         <h2 class="text-4xl font-bold text-[#6b4f4f]">Create Account</h2>
         <p class="mt-2 text-[#9c7b7b]">Join Unique Beauty</p>
-        <p class="text-sm text-[#9c7b7b]">Already have an account? <a href="/login" class="text-[#ff2d96] hover:underline">Sign in</a></p>
+        <p class="text-sm text-[#9c7b7b]">Already have an account? <a href={resolve('/login')} class="text-[#ff2d96] hover:underline">Sign in</a></p>
       </div>
 
       <div class="space-y-4">

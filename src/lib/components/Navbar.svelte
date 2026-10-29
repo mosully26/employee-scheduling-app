@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { supabase } from '$lib/supabaseClient';
 
   let pathname = $state('');
@@ -46,11 +47,11 @@
     </div>
 
     <div class="hidden items-center gap-2 md:flex">
-      <a href="/dashboard" class={linkClasses('/dashboard')}>Dashboard</a>
-      <a href="/schedule" class={linkClasses('/schedule')}>Schedule</a>
-      <a href="/time-off" class={linkClasses('/time-off')}>Time Off</a>
-      <a href="/profile" class={linkClasses('/profile')}>Profile</a>
-      <a href="/admin" class={linkClasses('/admin')}>Admin</a>
+      <a href={resolve('/dashboard')} class={linkClasses('/dashboard')}>Dashboard</a>
+      <a href={resolve('/schedule')} class={linkClasses('/schedule')}>Schedule</a>
+      <a href={resolve('/time-off')} class={linkClasses('/time-off')}>Time Off</a>
+      <a href={resolve('/profile')} class={linkClasses('/profile')}>Profile</a>
+      <a href={resolve('/admin')} class={linkClasses('/admin')}>Admin</a>
     </div>
 
     <button

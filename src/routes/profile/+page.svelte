@@ -8,7 +8,6 @@
     email?: string;
     full_name?: string;
     role?: string;
-    job_title?: string;
     phone?: string;
     profile_image_url?: string;
   } | null;
@@ -16,7 +15,6 @@
   let profile = $state<Profile>(null);
 
   let full_name = $state('');
-  let job_title = $state('');
   let phone = $state('');
   let profile_image_url = $state('');
 
@@ -63,7 +61,6 @@
         id: user.id,
         email: user.email,
         full_name: '',
-        job_title: '',
         phone: '',
         profile_image_url: ''
       };
@@ -81,7 +78,6 @@
 
       profile = insertedProfile;
       full_name = insertedProfile?.full_name ?? '';
-      job_title = insertedProfile?.job_title ?? '';
       phone = insertedProfile?.phone ?? '';
       profile_image_url = insertedProfile?.profile_image_url ?? '';
       return;
@@ -89,7 +85,6 @@
 
     profile = data;
     full_name = data.full_name ?? '';
-    job_title = data.job_title ?? '';
     phone = data.phone ?? '';
     profile_image_url = data.profile_image_url ?? '';
   } catch (err) {
@@ -118,7 +113,6 @@
       .from('profiles')
       .update({
         full_name: full_name.trim(),
-        job_title: job_title.trim(),
         phone: phone.trim(),
         profile_image_url
       })
@@ -133,7 +127,6 @@
 
     profile = data;
     full_name = data?.full_name ?? '';
-    job_title = data?.job_title ?? '';
     phone = data?.phone ?? '';
     profile_image_url = data?.profile_image_url ?? '';
 
@@ -192,7 +185,6 @@
   }
 
   const previewName = $derived(full_name || profile?.full_name || 'Employee');
-  const previewTitle = $derived(job_title || profile?.job_title || 'Unique Beauty Team');
   const previewEmail = $derived(profile?.email || '');
 </script>
 
@@ -285,10 +277,6 @@
                 {previewName}
               </h2>
 
-              <p class="mt-1 text-[#9c7b7b]">
-                {previewTitle}
-              </p>
-
               {#if previewEmail}
                 <p class="mt-2 break-all text-sm text-[#b08c8c]">
                   {previewEmail}
@@ -318,19 +306,6 @@
               </div>
 
               <div>
-                <label for="job_title" class="mb-2 block text-sm font-medium text-[#6b4f4f]">
-                  Job Title
-                </label>
-                <input
-                  id="job_title"
-                  bind:value={job_title}
-                  type="text"
-                  class="w-full rounded-xl border border-[#efd9dd] p-3 outline-none transition focus:border-[#ff2d96]"
-                  placeholder="Example: Stylist or Wig Consultant"
-                />
-              </div>
-
-              <div>
                 <label for="phone" class="mb-2 block text-sm font-medium text-[#6b4f4f]">
                   Phone
                 </label>
@@ -344,21 +319,21 @@
               </div>
 
               <div>
-                <label
-                  for="profile_image_url"
-                  class="mb-2 block text-sm font-medium text-[#6b4f4f]"
+                <span class="mb-2 block text-sm font-medium text-[#6b4f4f]">
+                  Profile Image
+                </span>
+
+                <button
+                  type="button"
+                  onclick={triggerFileInput}
+                  aria-label="Upload profile image"
+                  class="w-full rounded-xl border border-[#efd9dd] bg-[#fff7f8] px-4 py-3 text-left text-sm font-medium text-[#6b4f4f] transition hover:border-[#ff2d96]"
                 >
-                  Profile Image URL
-                </label>
-                <input
-                  id="profile_image_url"
-                  bind:value={profile_image_url}
-                  type="text"
-                  class="w-full rounded-xl border border-[#efd9dd] p-3 outline-none transition focus:border-[#ff2d96]"
-                  placeholder="Paste an image URL"
-                />
+                  Upload from device
+                </button>
+
                 <p class="mt-2 text-xs text-[#b08c8c]">
-                  You can either upload an image above or paste an image URL here.
+                  This opens your file picker or photo library on mobile devices.
                 </p>
               </div>
 
@@ -398,6 +373,7 @@
   bind:this={fileInput}
   type="file"
   accept="image/*"
+  capture="environment"
   onchange={handleFileUpload}
   class="hidden"
   aria-hidden="true"

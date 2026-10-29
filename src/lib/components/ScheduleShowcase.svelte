@@ -9,37 +9,44 @@
 
   const rows = [
     [
-      { time: '9a–3p', label: 'Wig Consult', tone: 'pink' },
+      { time: '9a–12p', label: 'Wig Management', tone: 'pink' },
       null,
-      { time: '10a–6p', label: 'Installs', tone: 'rose' },
+      { time: '10a–12p', label: 'Inventory', tone: 'rose' },
       null,
-      { time: '11a–5p', label: 'Wig Consult', tone: 'gold' }
+      { time: '11a–12p', label: 'Sales Floor', tone: 'gold' }
     ],
     [
       null,
-      { time: '9a–3p', label: 'Wig Consult', tone: 'blush' },
+      { time: '12p–3p', label: 'Cleaning', tone: 'blush' },
       null,
-      { time: '12p–6p', label: 'Braiding', tone: 'pink' },
+      { time: '12p–3p', label: 'Restocking', tone: 'pink' },
       null
     ],
     [
       null,
-      { time: '10a–4p', label: 'Wig Install', tone: 'pink' },
+      { time: '3p–6p', label: 'Store Organization', tone: 'pink' },
       null,
-      { time: '12p–8p', label: 'Wig Consult', tone: 'rose' },
-      { time: '12p–8p', label: 'Braiding', tone: 'rose' }
+      { time: '3p–6p', label: 'Wig Management', tone: 'rose' },
+      { time: '3p–6p', label: 'Sales Floor', tone: 'rose' }
     ],
     [
-      { time: '9a–5p', label: 'Store Mgmt', tone: 'brown' },
-      { time: '9a–5p', label: 'Inventory', tone: 'pink' },
-      { time: '9a–5p', label: 'Store Mgmt', tone: 'rose' },
-      { time: '9a–5p', label: 'Store Mgmt', tone: 'gold' },
-      { time: '9a–5p', label: 'Inventory', tone: 'blush' }
+      { time: '6p–8p', label: 'Store Organization', tone: 'brown' },
+      { time: '6p–8p', label: 'Inventory', tone: 'pink' },
+      { time: '6p–8p', label: 'Cleaning', tone: 'rose' },
+      { time: '6p–8p', label: 'Restocking', tone: 'gold' },
+      { time: '6p–8p', label: 'Sales Floor', tone: 'blush' }
     ]
   ];
 
+  const rowLabels = [
+    { time: '9 AM', range: '9–12' },
+    { time: '12 PM', range: '12–3' },
+    { time: '3 PM', range: '3–6' },
+    { time: '6 PM', range: '6–8' }
+  ];
+
   const toneClasses: Record<string, string> = {
-    pink: 'bg-gradient-to-r from-[#ff5ca8] to-[#ff8f84] text-white',
+    pink: 'bg-linear-to-r from-[#ff5ca8] to-[#ff8f84] text-white',
     rose: 'bg-[#f6d7df] text-[#744d54]',
     blush: 'bg-[#fdeef3] text-[#875f67]',
     gold: 'bg-[#f5e8cf] text-[#7a6143]',
@@ -47,27 +54,27 @@
   };
 </script>
 
-<div class="relative mx-auto w-full max-w-[860px]">
+<div class="relative mx-auto w-full max-w-215 pt-10 lg:pt-12">
   <div class="pointer-events-none absolute -left-10 top-8 h-32 w-32 rounded-full bg-[#ffd7e5]/70 blur-3xl"></div>
   <div class="pointer-events-none absolute right-0 top-0 h-36 w-36 rounded-full bg-[#ffe9d7]/60 blur-3xl"></div>
   <div class="pointer-events-none absolute bottom-10 left-1/3 h-28 w-28 rounded-full bg-[#f8dbe3]/60 blur-3xl"></div>
 
-  <div class="absolute -left-5 top-21 z-15 hidden rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-[0_14px_40px_rgba(161,117,127,0.18)] backdrop-blur animate-float-soft lg:block">
+  <div class="absolute left-3 top-0 z-15 hidden rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-[0_14px_40px_rgba(161,117,127,0.18)] backdrop-blur animate-float-soft lg:block">
     <p class="text-[0.65rem] uppercase tracking-[0.28em] text-[#b08a92]">Scheduled Days</p>
     <p class="mt-1 text-sm font-semibold text-[#6f5255]">Working 5 Days This Week</p>
   </div>
 
-  <div class="absolute -right-4 bottom-16 z-20 hidden rounded-2xl border border-white/70 bg-white/80 px-4 py-3 shadow-[0_14px_40px_rgba(161,117,127,0.18)] backdrop-blur animate-float-soft-delayed lg:block">
+  <div class="absolute -bottom-6 -right-4 z-20 hidden rounded-2xl border border-white/70 bg-white/90 px-4 py-3 shadow-[0_14px_40px_rgba(161,117,127,0.18)] backdrop-blur animate-float-soft-delayed lg:block">
     <p class="text-[0.65rem] uppercase tracking-[0.28em] text-[#b08a92]">Team Size</p>
     <p class="mt-1 text-sm font-semibold text-[#6f5255]">10 people max</p>
   </div>
 
-  <div class="absolute right-15 top-20 z-20 hidden rounded-full border border-white/70 bg-[#ff5ca8] px-4 py-2 text-xs font-semibold text-white shadow-[0_12px_30px_rgba(255,92,168,0.28)] animate-drift lg:block">
+  <div class="absolute right-4 top-2 z-20 hidden rounded-full border border-white/70 bg-[#ff5ca8] px-4 py-2 text-xs font-semibold text-white shadow-[0_12px_30px_rgba(255,92,168,0.28)] animate-drift lg:block">
     Schedule synced
   </div>
 
   <div class="relative overflow-hidden rounded-[2.2rem] border border-white/70 bg-white/70 shadow-[0_28px_80px_rgba(161,117,127,0.16)] backdrop-blur-xl">
-    <div class="pointer-events-none absolute inset-y-0 -left-1/3 z-10 w-1/3 bg-gradient-to-r from-transparent via-white/30 to-transparent blur-xl animate-shimmer"></div>
+    <div class="pointer-events-none absolute inset-y-0 -left-1/3 z-10 w-1/3 bg-linear-to-r from-transparent via-white/30 to-transparent blur-xl animate-shimmer"></div>
 
     <div class="border-b border-[#eedce2] bg-[linear-gradient(180deg,rgba(255,255,255,0.88),rgba(255,247,249,0.7))] px-4 py-4 md:px-6">
       <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -77,10 +84,10 @@
           </p>
           <div class="mt-2 flex flex-wrap items-center gap-3">
             <h3 class="text-2xl font-semibold tracking-[-0.03em] text-[#6d4d52] md:text-3xl">
-              Weekly Schedule
+              Week at a glance
             </h3>
             <span class="rounded-full bg-[#fff1f6] px-3 py-1 text-xs font-semibold text-[#ff4f9d] animate-pulse-soft">
-              Tue is busiest
+              Live planning
             </span>
           </div>
         </div>
@@ -90,30 +97,41 @@
             Calendar view
           </button>
           <button class="rounded-xl border border-[#ecdde1] bg-white px-3 py-2 text-sm font-medium text-[#8b6d73] shadow-sm">
-            Week of July 1
-          </button>
-          <button class="rounded-xl bg-gradient-to-r from-[#ff5ca8] to-[#ff8e86] px-4 py-2 text-sm font-semibold text-white shadow-[0_12px_24px_rgba(255,92,168,0.25)]">
-            Organized
+            Jul 12–16
           </button>
         </div>
       </div>
     </div>
 
-    <div class="grid grid-cols-5 overflow-x-auto xl:grid-cols-5">
-      {#each days as day}
-        <div
-          class={`border-b border-r border-[#f0e1e6] px-4 py-4 text-center ${day.highlight ? 'bg-[#fff5f8]' : 'bg-[linear-gradient(180deg,#fff,#fffafb)]'}`}
-        >
-          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#b18b93]">{day.short}</p>
-          <p class={`mt-1 text-lg font-semibold ${day.highlight ? 'text-[#ff4f9d]' : 'text-[#6d4d52]'}`}>
-            {day.date}
-          </p>
+    <div class="overflow-x-auto">
+      <div class="grid min-w-170 grid-cols-[76px_repeat(5,minmax(120px,1fr))]">
+        <div class="border-b border-r border-[#f0e1e6] bg-[#fffafb] px-2 py-4 text-center">
+          <span class="text-[0.6rem] font-semibold uppercase tracking-[0.18em] text-[#b18b93]">Time</span>
         </div>
-      {/each}
+        {#each days as day (day.short)}
+          <div
+            class={`border-b border-r border-[#f0e1e6] px-3 py-4 text-center sm:px-4 ${day.highlight ? 'bg-[#fff5f8]' : 'bg-[linear-gradient(180deg,#fff,#fffafb)]'}`}
+          >
+            <p class="text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-[#b18b93] sm:text-xs">{day.short}</p>
+            <p class={`mt-1 text-base font-semibold sm:text-lg ${day.highlight ? 'text-[#ff4f9d]' : 'text-[#6d4d52]'}`}>
+              {day.date}
+            </p>
+          </div>
+        {/each}
 
-      {#each rows as row, rowIndex}
-        {#each row as cell, dayIndex}
-          <div class={`relative min-h-[106px] border-r border-t border-[#f0e1e6] p-3 ${days[dayIndex].highlight ? 'bg-[#fffafb]' : 'bg-white/70'}`}>
+        {#each rows as row, rowIndex (rowIndex)}
+          <div class="flex min-h-26.5 items-center justify-center border-r border-t border-[#f0e1e6] bg-[#fffafb] px-2 text-center">
+            <div class="space-y-1 text-center">
+              <span class="block whitespace-nowrap text-[0.72rem] font-semibold uppercase tracking-[0.08em] text-[#8f7278]">
+                {rowLabels[rowIndex].time}
+              </span>
+              <span class="block whitespace-nowrap text-[0.62rem] font-medium tracking-[0.08em] text-[#c09ca5]">
+                {rowLabels[rowIndex].range}
+              </span>
+            </div>
+          </div>
+          {#each row as cell, dayIndex (dayIndex)}
+            <div class={`relative min-h-26.5 border-r border-t border-[#f0e1e6] p-2 sm:p-3 ${days[dayIndex].highlight ? 'bg-[#fffafb]' : 'bg-white/70'}`}>
             {#if cell}
               <div
                 class={`relative rounded-[1.2rem] px-3 py-3 shadow-[0_10px_22px_rgba(161,117,127,0.10)] ring-1 ring-white/40 transition-transform duration-500 hover:scale-[1.02] animate-breathe ${toneClasses[cell.tone]}`}
@@ -122,7 +140,7 @@
                 <div class="flex items-start justify-between gap-2">
                   <div>
                     <p class="text-sm font-semibold">{cell.time}</p>
-                    <p class="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] opacity-80">
+                    <p class="mt-1 text-[10px] font-medium uppercase leading-4 tracking-[0.12em] opacity-80">
                       {cell.label}
                     </p>
                   </div>
@@ -131,11 +149,12 @@
                 </div>
               </div>
             {:else}
-              <div class="absolute inset-3 rounded-[1rem] border border-dashed border-[#f4e6ea]"></div>
+              <div class="absolute inset-3 rounded-2xl border border-dashed border-[#f4e6ea]"></div>
             {/if}
           </div>
         {/each}
       {/each}
+      </div>
     </div>
 
     <div class="border-t border-[#eedce2] bg-[linear-gradient(180deg,#fffafc,#fff5f8)] px-4 py-4 md:px-6">

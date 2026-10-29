@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { supabase } from '$lib/supabaseClient';
 
   let {
@@ -22,7 +23,7 @@
     { href: '/time-off', label: 'Time Off' },
     { href: '/profile', label: 'Profile' },
     { href: '/admin', label: 'Admin' }
-  ];
+  ] as const;
 
   function updatePath() {
     if (typeof window !== 'undefined') {
@@ -121,14 +122,12 @@
       </div>
     </div>
   </div>
-  <div class="min-w-0">
-    
 
   <nav class="flex-1 px-4 py-5">
     <div class="space-y-2">
-      {#each links as link}
+      {#each links as link (link.href)}
         <a
-          href={link.href}
+          href={resolve(link.href)}
           class={`block rounded-xl px-4 py-3 font-medium transition ${
             isActive(link.href)
               ? 'bg-[#ff2d96] text-white shadow-sm'

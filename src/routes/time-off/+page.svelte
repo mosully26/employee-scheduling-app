@@ -4,7 +4,21 @@
   import Sidebar from '$lib/components/Sidebar.svelte';
   import TimeOffForm from '$lib/components/TimeOffForm.svelte';
 
-  let profile = $state<any>(null);
+  type Profile = {
+    full_name?: string;
+    role?: string;
+    profile_image_url?: string;
+  };
+
+  type TimeOffRequest = {
+    id?: string | number;
+    start_date: string;
+    end_date: string;
+    reason?: string | null;
+    status: string;
+  };
+
+  let profile = $state<Profile | null>(null);
   let start_date = $state('');
   let end_date = $state('');
   let reason = $state('');
@@ -13,7 +27,7 @@
   let loading = $state(true);
   let submitting = $state(false);
   let requestsLoading = $state(true);
-  let requests = $state<any[]>([]);
+  let requests = $state<TimeOffRequest[]>([]);
   let sidebarOpen = $state(false);
 
   onMount(async () => {
@@ -220,7 +234,7 @@
               </div>
             {:else}
               <div class="space-y-4">
-                {#each requests as request}
+                {#each requests as request (request.id ?? `${request.start_date}-${request.end_date}-${request.status}`)}
                   <div class="rounded-2xl border border-[#ead8d8] p-4">
                     <div class="mb-2 flex items-center justify-between gap-3">
                       <p class="font-semibold text-[#6b4f4f]">

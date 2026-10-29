@@ -49,7 +49,7 @@
       <textarea
         id="timeoff-reason"
         bind:value={reason}
-        class="min-h-[120px] w-full rounded-lg border p-3"
+        class="min-h-30 w-full rounded-lg border p-3"
         placeholder="Enter a short reason"
       ></textarea>
     </div>

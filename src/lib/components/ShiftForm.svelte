@@ -1,4 +1,9 @@
 <script lang="ts">
+  type Employee = {
+    id: string | number;
+    full_name?: string | null;
+  };
+
   let {
     employees = [],
     employee_id = $bindable(''),
@@ -10,7 +15,7 @@
     notes = $bindable(''),
     onsubmit
   }: {
-    employees?: any[];
+    employees?: Employee[];
     employee_id?: string;
     title?: string;
     shift_role?: string;
@@ -27,18 +32,19 @@
 
   <div class="space-y-4">
     <div>
-      <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">Employee</label>
-      <select bind:value={employee_id} class="w-full rounded-lg border p-3">
+      <label for="employee" class="mb-2 block text-sm font-medium text-[#6b4f4f]">Employee</label>
+      <select id="employee" bind:value={employee_id} class="w-full rounded-lg border p-3">
         <option value="">Select an employee</option>
-        {#each employees as employee}
+        {#each employees as employee (employee.id)}
           <option value={employee.id}>{employee.full_name}</option>
         {/each}
       </select>
     </div>
 
     <div>
-      <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">Shift Title</label>
+      <label for="shift-title" class="mb-2 block text-sm font-medium text-[#6b4f4f]">Shift Title</label>
       <input
+        id="shift-title"
         bind:value={title}
         type="text"
         class="w-full rounded-lg border p-3"
@@ -47,8 +53,9 @@
     </div>
 
     <div>
-      <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">Role</label>
+      <label for="shift-role" class="mb-2 block text-sm font-medium text-[#6b4f4f]">Role</label>
       <input
+        id="shift-role"
         bind:value={shift_role}
         type="text"
         class="w-full rounded-lg border p-3"
@@ -58,26 +65,27 @@
 
     <div class="grid gap-4 md:grid-cols-2">
       <div>
-        <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">Start Time</label>
-        <input bind:value={start_time} type="datetime-local" class="w-full rounded-lg border p-3" />
+        <label for="start-time" class="mb-2 block text-sm font-medium text-[#6b4f4f]">Start Time</label>
+        <input id="start-time" bind:value={start_time} type="datetime-local" class="w-full rounded-lg border p-3" />
       </div>
 
       <div>
-        <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">End Time</label>
-        <input bind:value={end_time} type="datetime-local" class="w-full rounded-lg border p-3" />
+        <label for="end-time" class="mb-2 block text-sm font-medium text-[#6b4f4f]">End Time</label>
+        <input id="end-time" bind:value={end_time} type="datetime-local" class="w-full rounded-lg border p-3" />
       </div>
     </div>
 
     <div>
-      <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">Color</label>
-      <input bind:value={color} type="color" class="h-12 w-full rounded-lg border p-2" />
+      <label for="shift-color" class="mb-2 block text-sm font-medium text-[#6b4f4f]">Color</label>
+      <input id="shift-color" bind:value={color} type="color" class="h-12 w-full rounded-lg border p-2" />
     </div>
 
     <div>
-      <label class="mb-2 block text-sm font-medium text-[#6b4f4f]">Notes</label>
+      <label for="shift-notes" class="mb-2 block text-sm font-medium text-[#6b4f4f]">Notes</label>
       <textarea
+        id="shift-notes"
         bind:value={notes}
-        class="min-h-[100px] w-full rounded-lg border p-3"
+        class="min-h-25 w-full rounded-lg border p-3"
         placeholder="Add any extra notes"
       ></textarea>
     </div>
