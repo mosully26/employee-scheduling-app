@@ -28,8 +28,46 @@
 </script>
 
 <svelte:head>
-  <title>Unique Beauty | Team Scheduling</title>
-  <meta name="description" content="A modern team scheduling and workforce management portal for Unique Beauty." />
+  <title>Unique Beauty | Employee Scheduling Platform</title>
+
+  <meta
+    name="description"
+    content="A custom-built employee scheduling and workforce management platform for Unique Beauty, designed to simplify scheduling, coordinate team members, manage staffing requests, and improve daily operations."
+  />
+
+  <meta property="og:type" content="website" />
+
+  <meta
+    property="og:title"
+    content="Unique Beauty | Employee Scheduling Platform"
+  />
+
+  <meta
+    property="og:description"
+    content="Explore a custom-built employee scheduling and workforce management platform developed for Unique Beauty using SvelteKit, Supabase, and PostgreSQL. Built to simplify scheduling and improve team coordination."
+  />
+
+  <meta
+    property="og:image"
+    content="https://ubteam.vercel.app/linkedin-preview.png"
+  />
+
+  <meta
+    property="og:image:width"
+    content="1200"
+  />
+
+  <meta
+    property="og:image:height"
+    content="630"
+  />
+
+  <meta
+    property="og:url"
+    content="https://ubteam.vercel.app/"
+  />
+
+  <meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 <div class="min-h-screen overflow-hidden bg-[#f7f2f0] text-[#342b2b]">
