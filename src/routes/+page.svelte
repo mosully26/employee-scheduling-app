@@ -98,8 +98,8 @@
           </div>
 
           <h1 class="max-w-3xl text-5xl font-bold leading-[0.96] tracking-[-0.055em] text-[#342b2b] sm:text-6xl lg:text-[5.25rem]">
-            Work beautifully.<br />
-            <span class="text-[#d93483]">Stay in sync.</span>
+            Work Beautifully<br />
+            <span class="text-[#d93483]">Stay In Sync</span>
           </h1>
 
           <p class="mt-7 max-w-xl text-lg leading-8 text-[#756565]">
